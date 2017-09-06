@@ -67,15 +67,7 @@ if (program.put) {
             return
         } else {
             body = JSON.parse(body)
-            vfirstname = body.firstname
-            vmiddlename = body.middlename
-            vlastname = body.lastname
-            vemail = body.email
-            vcontactphone = body.contactphone
-            vaddress = body.address
-            vzip = body.zip
-            vcity = body.city
-            vstate = body.state
+            
             prompt.start();
             var schema = {
                 properties: {
