@@ -1,0 +1,6 @@
+    .option('-g, --get [n]', 'get applicant(s) id or all')
+    .option('-i, --id <n>', 'get applicant by id ')
+    .option('-d, --delete <n>', 'delete applicant')
+    .option('-q, --query <n>', 'query search')
+    .option('-p, --post [n]', 'post new applicant')
+    .option('-u, --put [n]', 'edit applicant')
