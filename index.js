@@ -11,6 +11,7 @@ var bodyParser = require("body-parser");
 var prompt = require('prompt');
 const app = express();
 
+
 function list(val) {
     return val.split(',');
 }
@@ -28,6 +29,7 @@ program
     .option('-p, --post [n]', 'post new applicant')
     .option('-u, --put [n]', 'edit applicant')
     .parse(process.argv);
+
 
 if (program.post) {
     var objToSend = {}
@@ -67,7 +69,7 @@ if (program.put) {
             return
         } else {
             body = JSON.parse(body)
-            
+
             prompt.start();
             var schema = {
                 properties: {
@@ -120,30 +122,30 @@ if (program.put) {
         }
     })
 }
-    if (program.delete) {
-        request({ url: `http://localhost:3008/applications/${program.delete}`, method: "DELETE" }, function(error, response, body) {
-            console.log("delete: " + JSON.stringify(body));
-        })
-    }
-    if (program.get && !program.id && !program.query) {
-        request({ url: "http://localhost:3008/applications", method: "GET" }, function(error, response, body) {
-            console.log("get all: ");
-            console.log(body);
-        })
-    }
+if (program.delete) {
+    request({ url: `http://localhost:3008/applications/${program.delete}`, method: "DELETE" }, function(error, response, body) {
+        console.log("delete: " + JSON.stringify(body));
+    })
+}
+if (program.get && !program.id && !program.query) {
+    request({ url: "http://localhost:3008/applications", method: "GET" }, function(error, response, body) {
+        console.log("get all: ");
+        console.log(body);
+    })
+}
 
-    if (program.get && program.id) {
-        console.log(`http://localhost:3008/applications/${program.id}`);
-        request({ url: `http://localhost:3008/applications/${program.id}`, method: "GET" }, function(error, response, body) {
-            console.log("get by id: ")
-            console.log(body);
-        })
-    }
-    if (program.get && !program.id && program.query) {
-        console.log(`http://localhost:3008/applications-search?${program.query}`)
-        request({ url: `http://localhost:3008/applications-search?${program.query}`, method: "GET" }, function(error, response, body) {
+if (program.get && program.id) {
+    console.log(`http://localhost:3008/applications/${program.id}`);
+    request({ url: `http://localhost:3008/applications/${program.id}`, method: "GET" }, function(error, response, body) {
+        console.log("get by id: ")
+        console.log(body);
+    })
+}
+if (program.get && !program.id && program.query) {
+    console.log(`http://localhost:3008/applications-search?${program.query}`)
+    request({ url: `http://localhost:3008/applications-search?${program.query}`, method: "GET" }, function(error, response, body) {
 
-            console.log("Query search: ");
-            console.log(body);
-        })
-    }
+        console.log("Query search: ");
+        console.log(body);
+    })
+}
