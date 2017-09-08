@@ -140,28 +140,52 @@ if (program.put && program.id) {
 }
 if (program.delete) {
     request({ url: `http://localhost:3008/applications/${program.delete}`, method: "DELETE" }, function(error, response, body) {
-        console.log("delete: " + JSON.stringify(body));
+        if (error) {
+            console.log(error);
+
+        } else {
+            console.log("delete: " + JSON.stringify(body));
+        }
     })
+}
+if (!program.get && program.id && !program.query) {
+    console.log(`
+        ERROR! FOLLOW THESE INSTRUCTIONS TO GET BY ID!
+        To Get by ID:
+        "node index.js -g -i idnumber"
+        `)
 }
 if (program.get && !program.id && !program.query) {
     request({ url: "http://localhost:3008/applications", method: "GET" }, function(error, response, body) {
-        console.log("get all: ");
-        console.log(body);
+        if (error) {
+            console.log(error);
+
+        } else {
+            console.log("get all: ");
+            console.log(body);
+        }
     })
 }
 
 if (program.get && program.id) {
     console.log(`http://localhost:3008/applications/${program.id}`);
     request({ url: `http://localhost:3008/applications/${program.id}`, method: "GET" }, function(error, response, body) {
-        console.log("get by id: ")
-        console.log(body);
+        if (error) {
+            console.log('ID NOT FOUND, PLEASE TRY AGAIN');
+
+        } else {
+            console.log("get by id: ")
+            console.log(body);
+        }
     })
 }
 if (program.get && !program.id && program.query) {
-    console.log(`http://localhost:3008/applications-search?${program.query}`)
     request({ url: `http://localhost:3008/applications-search?${program.query}`, method: "GET" }, function(error, response, body) {
-
-        console.log("Query search: ");
-        console.log(body);
+        if (error) {
+            console.log(error);
+        } else {
+            console.log("Query search: ");
+            console.log(body);
+        }
     })
 }
