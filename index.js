@@ -53,61 +53,77 @@ if (program.post) {
         })
     }
 }
-if (program.put) {
-    var vfirstname = ""
-    var vmiddlename = ""
-    var vlastname = ""
-    var vemail = ""
-    var vcontactphone = ""
-    var vaddress = ""
-    var vzip = ""
-    var vcity = ""
-    var vstate = ""
-    request({ url: `http://localhost:3008/applications${program.id}`, method: "GET" }, function(error, response, body) {
-        if (body == '"not found"') {
-            console.log("not found")
-            return
-        } else {
-            body = JSON.parse(body)
+if (program.put && program.id) {
+    request({ url: `http://localhost:3008/applications/${program.id}`, method: "GET" }, function(error, response, body) {
+        if (error) {
+            console.log(error);
 
-            prompt.start();
-            var schema = {
-                properties: {
-                    firstname: {
-                        description: `firstname=${vfirstname}`,
-                        required: true
-                    },
-                    middlename: {
-                        description: `middlename=${vmiddlename}`,
-                        required: true
-                    },
-                    lastname: {
-                        description: `lastname=${vlastname}`,
-                        required: true
-                    },
-                    email: {
-                        description: `email=${vemail}`,
-                        required: true
-                    },
-                    contactphone: {
-                        description: `contactphone=${vcontactphone}`,
-                        required: true
-                    },
-                    address: {
-                        description: `address=${vaddress}`,
-                        required: true
-                    },
-                    zip: {
-                        description: `zip=${vzip}`,
-                        required: true
-                    },
-                    city: {
-                        description: `city=${vcity}`,
-                        required: true
-                    },
-                    state: {
-                        description: `state=${vstate}`,
-                        required: true
+        } else {
+            var responseBody = JSON.parse(body);
+            var vfirstname = responseBody[0].firstname;
+            var vmiddlename = responseBody[0].middlename;
+            var vlastname = responseBody[0].lastname;
+            var vemail = responseBody[0].email;
+            var vcontactphone = responseBody[0].contactphone;
+            var vaddress = responseBody[0].address;
+            var vzip = responseBody[0].zip;
+            var vcity = responseBody[0].city;
+            var vstate = responseBody[0].state;
+
+            if (body == '"not found"') {
+                console.log("not found")
+                return
+            } else {
+                body = JSON.parse(body)
+
+                prompt.start();
+                var schema = {
+                    properties: {
+                        firstname: {
+                            description: `First Name`,
+                            required: true,
+                            default: vfirstname
+                        },
+                        middlename: {
+                            description: `Middle Name`,
+                            required: true,
+                            default: vmiddlename
+                        },
+                        lastname: {
+                            description: `Last Name`,
+                            required: true,
+                            default: vlastname
+                        },
+                        email: {
+                            description: `E-Mail`,
+                            required: true,
+                            default: vemail
+                        },
+                        contactphone: {
+                            description: `Contact Phone`,
+                            required: true,
+                            default: vcontactphone
+                        },
+                        address: {
+                            description: `Address`,
+                            required: true,
+                            default: vaddress
+                        },
+                        zip: {
+                            description: `Zip`,
+                            required: true,
+                            default: vzip
+                        },
+                        city: {
+                            description: `City`,
+                            required: true,
+                            default: vcity
+                        },
+                        state: {
+                            description: `State`,
+                            required: true,
+                            default: vstate
+                        }
                     }
                 }
             }

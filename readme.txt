@@ -21,5 +21,7 @@ Then:
 Follow Prompts
 
 To Edit Applicant:
-"node index.js -u idnumber"
-
+"node index.js -u -i idnumber"
+Then:
+To keep the previous value, just press Enter!
+To edit a new value, type it in the prompt!
