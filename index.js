@@ -148,7 +148,7 @@ if (program.delete) {
         }
     })
 }
-if (!program.get && program.id && !program.query) {
+if (program.id && !program.get && !program.query && !program.put) {
     console.log(`
         ERROR! FOLLOW THESE INSTRUCTIONS TO GET BY ID!
         To Get by ID:
