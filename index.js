@@ -174,8 +174,34 @@ if (program.get && program.id) {
             console.log('ID NOT FOUND, PLEASE TRY AGAIN');
 
         } else {
-            console.log("get by id: ")
-            console.log(body);
+            var responseBody = JSON.parse(body);
+            var vfirstname = responseBody[0].firstname;
+            var vmiddlename = responseBody[0].middlename;
+            var vlastname = responseBody[0].lastname;
+            var vemail = responseBody[0].email;
+            var vcontactphone = responseBody[0].contactphone;
+            var vaddress = responseBody[0].address;
+            var vzip = responseBody[0].zip;
+            var vcity = responseBody[0].city;
+            var vstate = responseBody[0].state;
+            var vid = responseBody[0]._id;
+            var vapplicationstate = responseBody[0].applicationstate;
+            var vcreated = responseBody[0].createdate;
+            var vmodified = responseBody[0].modifydate;
+            console.log("ID Search result: ")
+            console.log(`
+                Name: ${vlastname}, ${vfirstname} ${vmiddlename} 
+                E-Mail: ${vemail}
+                Contact Phone Number: ${vcontactphone}
+                Address: ${vaddress}
+                Zip: ${vzip}
+                City: ${vcity}
+                State: ${vstate}
+                ID: ${vid}
+                Application Status: ${vapplicationstate}
+                Date Created: ${vcreated}
+                Date Modified: ${vmodified}
+                `);
         }
     })
 }
