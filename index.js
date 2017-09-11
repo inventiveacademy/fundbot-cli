@@ -161,8 +161,18 @@ if (program.get && !program.id && !program.query) {
             console.log(error);
 
         } else {
-            console.log("get all: ");
-            console.log(body);
+            var responseBody = JSON.parse(body);
+            console.log("List of Applicants:")
+            for (i = 0; i < responseBody.length; i++) {
+                var responseBody = JSON.parse(body);
+                var vfirstname = responseBody[i].firstname;
+                var vmiddlename = responseBody[i].middlename;
+                var vlastname = responseBody[i].lastname;
+                var vid = responseBody[i]._id
+                console.log(`
+                    ${vlastname}, ${vfirstname} ${vmiddlename}, ID: ${vid} 
+                    `);
+            }
         }
     })
 }
@@ -188,6 +198,7 @@ if (program.get && program.id) {
             var vapplicationstate = responseBody[0].applicationstate;
             var vcreated = responseBody[0].createdate;
             var vmodified = responseBody[0].modifydate;
+            var vdeletion = responseBody[0].isdeleted;
             console.log("ID Search result: ")
             console.log(`
                 Name: ${vlastname}, ${vfirstname} ${vmiddlename} 
@@ -201,11 +212,12 @@ if (program.get && program.id) {
                 Application Status: ${vapplicationstate}
                 Date Created: ${vcreated}
                 Date Modified: ${vmodified}
+                Deleted (True or False): ${vdeletion}
                 `);
         }
     })
 }
-if (program.get && !program.id && program.query) {
+if (!program.get && !program.id && program.query) {
     request({ url: `http://localhost:3008/applications-search?${program.query}`, method: "GET" }, function(error, response, body) {
         if (error) {
             console.log(error);
